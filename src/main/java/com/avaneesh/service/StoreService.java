@@ -3,23 +3,22 @@ package com.avaneesh.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.avaneesh.database.DatabaseClass;
+import com.avaneesh.database.DatabaseConnection;
 import com.avaneesh.model.Store;
 
 public class StoreService {
 	
-	private Map<String, Store> stores = DatabaseClass.getStores();
+	DatabaseConnection dbc = new DatabaseConnection();
 	
-	public StoreService() {
+	/*public StoreService() {
 		stores.put("avaneesh", new Store(1L, "Avaneesh", "chennai", 200001));
+	}*/
+	
+	public List<Store> getAllStores() throws Exception {
+		return dbc.getStoresAll(); 
 	}
 	
-	public List<Store> getAllStores() {
-		return new ArrayList<Store>(stores.values()); 
-	}
-	
-	public Store getStore(String storeName) {
+	/*public Store getStore(String storeName) {
 		return stores.get(storeName);
 	}
 	
@@ -40,6 +39,6 @@ public class StoreService {
 	public Store removeStore(String storeName) {
 		return stores.remove(storeName);
 	}
-	
+	*/
 
 }

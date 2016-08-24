@@ -21,11 +21,11 @@ public class StoreResources {
 	private StoreService storeService = new StoreService();
 	
 	@GET
-	public List<Store> getStores() {
+	public List<Store> getStores() throws Exception {
 		return storeService.getAllStores();
 	}
 	
-	@POST
+	/*@POST
 	public Store addStore(Store store) {
 		return storeService.addStore(store);
 	}
@@ -47,6 +47,6 @@ public class StoreResources {
 	@Path("/{storeName}")
 	public void deleteStore(@PathParam("storeName") String storeName) {
 		storeService.removeStore(storeName);
-	}
+	}*/
 	
 }

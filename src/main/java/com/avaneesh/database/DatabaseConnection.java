@@ -22,23 +22,4 @@ public class DatabaseConnection extends Store {
 			throw e;
 		}
 	}
-	
-	public List<Store> getStoresAll() throws Exception{
-		
-		List ls = new ArrayList<>();
-		
-		Connection con = null;
-		
-			con =  getConnection();
-			
-			Statement stmt = con.createStatement();
-
-        String sqlSelect =  "SELECT * FROM store_info ";
-        
-        ResultSet rs = stmt.executeQuery(sqlSelect);
-        while(rs.next()){
-        	ls.add(rs);
-        }
-        return ls;
-    }
 }

@@ -16,6 +16,7 @@ public class Store {
 	    }
 	    
 	    public Store(long id, String storeName, String address, int zipCode) {
+	    	super();
 			this.id = id;
 			this.storeName = storeName;
 			this.address = address;

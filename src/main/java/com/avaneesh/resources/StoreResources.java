@@ -15,40 +15,43 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.avaneesh.model.Store;
 import com.avaneesh.service.StoreService;
 
-@Path("/stores")
+@Path("/store")
 @Produces(MediaType.APPLICATION_XML)
 public class StoreResources {
 	
 	private StoreService storeService = new StoreService();
 	
 	@GET
+	@Path("/stores")
 	@Produces(MediaType.APPLICATION_XML)
 	public List<Store> getStores() throws Exception {
 		return storeService.getAllStores();
 	}
 	
-	/*@POST
+	@GET
+	@Path("/{storeId}")
+	public List<Store> getStore(@PathParam("storeId") String storeId) throws Exception {
+		return storeService.getStore(storeId);
+	} 
+	  
+	 @POST
 	public Store addStore(Store store) {
 		return storeService.addStore(store);
 	}
 	
-	@GET
-	@Path("/{storeName}")
-	public Store getStore(@PathParam("storeName") String storeName) {
-		return storeService.getStore(storeName);
-	}
 	
+	/*
 	@PUT
 	@Path("/{storeName}")
 	public Store updateStore(@PathParam("storeName") String storeName, Store store) {
 		store.setStoreName(storeName);
 		return storeService.updateStore(store);
 	}
-	
+	*/
 	@DELETE
-	@Path("/{storeName}")
-	public void deleteStore(@PathParam("storeName") String storeName) {
-		storeService.removeStore(storeName);
-	}*/
+	@Path("/{storeId}")
+	public void deleteStore(@PathParam("storeId") String storeId) throws Exception {
+		storeService.removeStore(storeId);
+	}
 	
 }

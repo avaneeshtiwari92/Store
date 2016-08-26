@@ -35,7 +35,7 @@ public class StoreResources {
 	} 
 	  
 	 @POST
-	public Store addStore(Store store) {
+	public String addStore(Store store) throws Exception {
 		return storeService.addStore(store);
 	}
 	

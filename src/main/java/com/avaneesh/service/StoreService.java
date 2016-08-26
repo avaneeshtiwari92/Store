@@ -1,5 +1,9 @@
 package com.avaneesh.service;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +26,7 @@ public class StoreService {
 		stores.put("avaneesh", new Store(1L, "Avaneesh", "chennai", 200001));
 	}*/
 	
+	//This method can be used for Getting all the stores.
 	public List<Store> getAllStores() throws Exception {
 		List<Store> ls = new ArrayList<Store>();
 		try {
@@ -60,6 +65,7 @@ public class StoreService {
 
 	}
 	
+	//This method used for Getting the specific store.
 	public List<Store> getStore(String storeId) throws Exception {
 		List<Store> ls = new ArrayList<Store>();
 		try {
@@ -97,13 +103,14 @@ public class StoreService {
 		}
 	}
 	
-	public String addStore(String storeName, String address, int ZipCode) throws Exception {
+	//This method used for adding a store in Database.
+	public String addStore(Store store) throws Exception {
 		try {
 			con = dbc.getConnection();
 			stmt = con.createStatement();
-			String sqlSelect = "INSERT into store_info (name, address, zipcode) VALUES ('" + storeName +"' , '" + address +"', '" + ZipCode +"' )";
-			rs = stmt.executeQuery(sqlSelect);
-			return "Inserting Succesffuly";
+			String sqlSelect = "INSERT into store_info (name, address, zipcode) VALUES ('" + store.getStoreName() +"' , '" + store.getAddress() +"', '" + store.getZipCode() +"' )";
+			stmt.executeUpdate(sqlSelect);
+			return "Inserted Succesffuly";
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -116,9 +123,6 @@ public class StoreService {
 				}
 				if (stmt != null) {
 					stmt.close();
-				}
-				if (rs != null) {
-					rs.close();
 				}
 			} catch (SQLException sqlee) {
 				sqlee.printStackTrace();
@@ -134,12 +138,14 @@ public class StoreService {
 		return store;
 	}
 	*/
+	
+	//This method used for deleting the store.
 	public String removeStore(String storeId) throws Exception {
 		try {
 			con = dbc.getConnection();
 			stmt = con.createStatement();
 			String sqlSelect = "DELETE FROM store_info where id = '" + storeId +"' ";
-			rs = stmt.executeQuery(sqlSelect);
+			stmt.executeQuery(sqlSelect);
 			return "Deleted Successfully: '" + storeId +"' ";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,13 +159,30 @@ public class StoreService {
 				if (stmt != null) {
 					stmt.close();
 				}
-				if (rs != null) {
-					rs.close();
-				}
 			} catch (SQLException sqlee) {
 				sqlee.printStackTrace();
 			}
 		}
+	}
+	
+	//The method will be used for searching the stores within the given miles.
+	public void serachStore(int miles, int zipCode){
+		
+		try {
+		    URL myURL = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDgCo_tI9uwWixYXUn1b1cqvxWQBcPeA28");
+		    URLConnection myURLConnection = myURL.openConnection();
+		    myURLConnection.connect();
+		} 
+		    
+		    catch (MalformedURLException e) { 
+		        // new URL() failed
+		        // ...
+		    } 
+		    catch (IOException e) {   
+		        // openConnection() failed
+		        // ...
+		    }
+		
 	}
 	
 
